@@ -14,6 +14,9 @@ exports.postContact = async (req, res) => {
 
     res.status(201).json(contact);
   } catch (error) {
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ message: error.message });
+    }
     res.status(500).json({ message: error.message });
   }
 };
@@ -45,7 +48,8 @@ exports.getContactById = async (req, res) => {
 exports.updateContact = async (req, res) => {
     try {
         const { id } = req.params;
-        const contact = await Contact.findByIdAndUpdate(id, req.body);
+
+        const contact = await Contact.findByIdAndUpdate(id, req.body, { runValidators: true });
         
         if(!contact){
             return res.statut(404).json({message: "Contact no found!"});
@@ -53,6 +57,9 @@ exports.updateContact = async (req, res) => {
 
         res.status(200).json(contact)
     } catch (error){
+        if (error.name === 'ValidationError') {
+        return res.status(400).json({ message: error.message });
+        }
         res.status(500).json({message: error.message});
     } 
 };
