@@ -5,12 +5,12 @@ const cors = require('cors');
 const contactRoutes = require('./routes/ContactRoute');
 const userRoutes = require('./routes/UserRoute');
 const setupSwagger = require('./swagger');
-
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: FRONTEND_URL,
   credentials: true
 }));
 
@@ -21,7 +21,6 @@ setupSwagger(app);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/users", userRoutes);
 
-// Connexion à Mongo
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
   console.log('Connected to database!');

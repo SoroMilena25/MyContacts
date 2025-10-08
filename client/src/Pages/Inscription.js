@@ -27,7 +27,7 @@ export default function Inscription() {
 
       alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
 
-      navigate("/connexion"); 
+      navigate("/"); 
 
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);

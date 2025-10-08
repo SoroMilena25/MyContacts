@@ -1,4 +1,3 @@
-import axios from 'axios';
 import './App.css';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -9,13 +8,6 @@ import AddContact from './Pages/AddContact'
 import ModifierContact from './Pages/ModifierContact'
 
 function App() {
-
-  const apiCall = () => {
-  axios.get('http://localhost:8080').then((data) => {
-    console.log(data)
-  })
-}
-
   return (
     <div className="App">
       <BrowserRouter>
