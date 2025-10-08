@@ -1,17 +1,33 @@
+require('dotenv').config();
 const express = require('express');
-const contactRoutes = require('./routes/contact.route');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const contactRoutes = require('./routes/ContactRoute');
+const userRoutes = require('./routes/UserRoute');
+const setupSwagger = require('./swagger');
+
 
 const app = express();
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
 app.use(express.json());
 
-app.use("/api/contacts", contactRoutes);
+setupSwagger(app);
 
-mongoose.connect('mongodb+srv://dbMilena:milena125Mongo!@backendb.s0rern9.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackenDB')
+app.use("/api/contacts", contactRoutes);
+app.use("/api/users", userRoutes);
+
+// Connexion à Mongo
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
   console.log('Connected to database!');
-  app.listen(8080, () => {
-      console.log('server listening on port 8080')
-})
+  app.listen(process.env.PORT, () => {
+      console.log(`Server listening on port ${process.env.PORT}`);
+  })
 })
 .catch(() => {
   console.error('Connection failed!');

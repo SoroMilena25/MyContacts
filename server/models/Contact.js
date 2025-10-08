@@ -7,8 +7,7 @@ const contactSchema = new mongoose.Schema(
         phone: { type: String, required: true },
         email: { type: String, required: true },
         birthday: { type: Date, required: true },
-        photo: { type: String }
-        //listContacts: { type: String }
+        user_id: { type: String, required: true }
     },
     {
         timestamps: true 
