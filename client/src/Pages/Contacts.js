@@ -15,7 +15,7 @@ export default function Contacts() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("http://localhost:8080/api/contacts/user", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/user`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export default function Contacts() {
 
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(`http://localhost:8080/api/contacts/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

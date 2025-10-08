@@ -18,7 +18,7 @@ export default function ModifierContact() {
     const fetchContact = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch(`http://localhost:8080/api/contacts/${id}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function ModifierContact() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch(`http://localhost:8080/api/contacts/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
